@@ -11,6 +11,14 @@ services:
       - "./nginx/log:/var/log/nginx"
     environment:
       TZ: "Asia/Tokyo"
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:6.5.2
+    environment:
+      TZ: "Asia/Tokyo"
+    volumes:
+      - "./nginx/log:/var/log/nginx/"
+      - "./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml"
+      - "./filebeat/log:/var/log/filebeat/"
   logstash:
     image: docker.elastic.co/logstash/logstash:6.5.2
     ports:
