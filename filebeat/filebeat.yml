@@ -4,6 +4,13 @@ filebeat:
         - /var/log/nginx/*.log
       input_type: log
 
+filebeat.modules:
+- module: nginx
+  access:
+    var.paths: ["/var/log/nginx/access.log"]
+  error:
+    var.paths: ["/var/log/nginx/error.log"]
+
 output.elasticsearch:
   hosts: ['elasticsearch:9200']
   protocol: "http"
